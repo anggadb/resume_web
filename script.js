@@ -39,7 +39,7 @@ aiForm.addEventListener('submit', async (e) => {
         const response = await fetch(backendURL, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ question })
+            body: JSON.stringify({ prompt: question })
         });
         const responseTextContent = await response.text();
 
