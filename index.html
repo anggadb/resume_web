@@ -1,3 +1,6 @@
+Berikut adalah pembaruan kode dengan nuansa **Warm Sunset / Golden Hour** yang lebih lembut, nyaman di mata (tidak terlalu terang), dan memberikan kesan musim panas yang hangat dan elegan:
+
+```html
 <!DOCTYPE html>
 <html lang="id" class="scroll-smooth">
 
@@ -11,29 +14,29 @@
 </head>
 
 <body
-    class="bg-slate-950 text-slate-100 font-sans antialiased overflow-x-hidden selection:bg-blue-500 selection:text-white">
+    class="bg-stone-950 text-stone-100 font-sans antialiased overflow-x-hidden selection:bg-amber-500 selection:text-white">
 
     <!-- Navbar Responsive -->
-    <nav class="fixed w-full top-0 z-50 bg-slate-950/80 backdrop-blur-md border-b border-slate-800/50 transition-all">
+    <nav class="fixed w-full top-0 z-50 bg-stone-950/80 backdrop-blur-md border-b border-stone-800/60 transition-all">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16 sm:h-20">
 
                 <!-- Logo -->
-                <a href="#" class="text-xl sm:text-2xl font-bold tracking-tight text-white hover:opacity-90 transition">
+                <a href="#" class="text-xl sm:text-2xl font-bold tracking-tight text-amber-400 hover:opacity-90 transition">
                     Angga Bachtiar
                 </a>
 
                 <!-- Desktop Nav Links -->
-                <div class="hidden md:flex items-center space-x-8 font-medium text-sm text-slate-300">
-                    <a href="#about" class="hover:text-blue-400 transition-colors">About Me</a>
-                    <a href="#experience" class="hover:text-blue-400 transition-colors">Experience</a>
-                    <a href="#contact" class="hover:text-blue-400 transition-colors">Contact</a>
+                <div class="hidden md:flex items-center space-x-8 font-medium text-sm text-stone-300">
+                    <a href="#about" class="hover:text-amber-400 transition-colors">About Me</a>
+                    <a href="#experience" class="hover:text-amber-400 transition-colors">Experience</a>
+                    <a href="#contact" class="hover:text-amber-400 transition-colors">Contact</a>
                 </div>
 
                 <!-- Mobile Hamburger Button -->
                 <div class="md:hidden flex items-center">
                     <button id="mobile-menu-btn" type="button"
-                        class="text-slate-300 hover:text-white focus:outline-none p-2 rounded-lg bg-slate-900 border border-slate-800"
+                        class="text-stone-300 hover:text-amber-400 focus:outline-none p-2 rounded-lg bg-stone-900 border border-stone-800"
                         aria-label="Toggle navigation">
                         <svg id="hamburger-icon" class="h-6 w-6 block" xmlns="http://www.w3.org/2000/svg" fill="none"
                             viewBox="0 0 24 24" stroke="currentColor">
@@ -53,14 +56,14 @@
 
         <!-- Mobile Drawer Menu -->
         <div id="mobile-menu"
-            class="hidden md:hidden bg-slate-900/95 border-b border-slate-800 px-4 pt-2 pb-6 space-y-3 backdrop-blur-lg">
+            class="hidden md:hidden bg-stone-900/95 border-b border-stone-800 px-4 pt-2 pb-6 space-y-3 backdrop-blur-lg">
             <a href="#about"
-                class="mobile-link block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-white hover:bg-slate-800 transition">About
+                class="mobile-link block px-3 py-2 rounded-md text-base font-medium text-stone-300 hover:text-amber-400 hover:bg-stone-800/60 transition">About
                 Me</a>
             <a href="#experience"
-                class="mobile-link block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-white hover:bg-slate-800 transition">Experience</a>
+                class="mobile-link block px-3 py-2 rounded-md text-base font-medium text-stone-300 hover:text-amber-400 hover:bg-stone-800/60 transition">Experience</a>
             <a href="#contact"
-                class="mobile-link block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-white hover:bg-slate-800 transition">Contact</a>
+                class="mobile-link block px-3 py-2 rounded-md text-base font-medium text-stone-300 hover:text-amber-400 hover:bg-stone-800/60 transition">Contact</a>
         </div>
     </nav>
 
@@ -68,39 +71,39 @@
     <header id="ai-hero"
         class="relative min-h-screen pt-28 pb-16 sm:pt-36 sm:pb-24 flex flex-col justify-center items-center px-4 sm:px-6 lg:px-8">
 
-        <!-- Glow Decorative Backgrounds -->
+        <!-- Glow Decorative Backgrounds (Warm Sunset Tones) -->
         <div
-            class="absolute w-[280px] sm:w-[500px] h-[280px] sm:h-[500px] bg-blue-600/20 rounded-full blur-3xl -top-10 -left-10 pointer-events-none">
+            class="absolute w-[280px] sm:w-[500px] h-[280px] sm:h-[500px] bg-amber-600/15 rounded-full blur-3xl -top-10 -left-10 pointer-events-none">
         </div>
         <div
-            class="absolute w-[250px] sm:w-[400px] h-[250px] sm:h-[400px] bg-purple-600/20 rounded-full blur-3xl bottom-10 -right-10 pointer-events-none">
+            class="absolute w-[250px] sm:w-[400px] h-[250px] sm:h-[400px] bg-orange-600/15 rounded-full blur-3xl bottom-10 -right-10 pointer-events-none">
         </div>
 
         <div class="relative z-10 text-center max-w-4xl mx-auto w-full">
 
             <!-- Badge -->
             <div
-                class="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-400 text-xs sm:text-sm font-medium mb-6">
+                class="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs sm:text-sm font-medium mb-6">
                 <span class="relative flex h-2 w-2">
                     <span
-                        class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
-                    <span class="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+                        class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
                 </span>
                 Software Engineer
             </div>
 
             <!-- Title -->
             <h1
-                class="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-white mb-4 sm:mb-6 leading-[1.15]">
+                class="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-stone-100 mb-4 sm:mb-6 leading-[1.15]">
                 CONVERT <br class="hidden sm:inline">
                 <span
-                    class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-500">Ideas
+                    class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-orange-400 to-yellow-300">Ideas
                     to Codes</span>
             </h1>
 
             <!-- Subtitle -->
             <p
-                class="text-slate-400 text-sm sm:text-lg md:text-xl max-w-2xl mx-auto mb-8 sm:mb-10 px-2 leading-relaxed">
+                class="text-stone-400 text-sm sm:text-lg md:text-xl max-w-2xl mx-auto mb-8 sm:mb-10 px-2 leading-relaxed">
                 Feel free to ask me anything about my experience, projects, or even AI-related questions. My AI
                 assistant is here to assist you!
             </p>
@@ -108,12 +111,12 @@
             <!-- Responsive AI Prompt Input Box -->
             <div class="w-full max-w-2xl mx-auto">
                 <form id="ai-form"
-                    class="flex flex-col sm:flex-row gap-2 sm:gap-0 bg-slate-900/90 border border-slate-700/80 p-2 sm:p-2 rounded-2xl sm:rounded-full shadow-2xl backdrop-blur-md focus-within:border-blue-500 focus-within:ring-2 focus-within:ring-blue-500/30 transition-all">
+                    class="flex flex-col sm:flex-row gap-2 sm:gap-0 bg-stone-900/90 border border-stone-800 p-2 sm:p-2 rounded-2xl sm:rounded-full shadow-2xl backdrop-blur-md focus-within:border-amber-500 focus-within:ring-2 focus-within:ring-amber-500/30 transition-all">
                     <input type="text" id="ai-input"
-                        class="w-full bg-transparent px-4 py-3 sm:py-3.5 text-slate-100 placeholder-slate-500 text-sm sm:text-base outline-none rounded-xl sm:rounded-full"
+                        class="w-full bg-transparent px-4 py-3 sm:py-3.5 text-stone-100 placeholder-stone-500 text-sm sm:text-base outline-none rounded-xl sm:rounded-full"
                         placeholder="Example: What is your experience with Node.js?" required>
                     <button type="submit"
-                        class="w-full sm:w-auto bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white font-semibold px-6 py-3 sm:py-3.5 rounded-xl sm:rounded-full transition-all flex items-center justify-center gap-2 shrink-0 active:scale-95">
+                        class="w-full sm:w-auto bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-white font-semibold px-6 py-3 sm:py-3.5 rounded-xl sm:rounded-full transition-all flex items-center justify-center gap-2 shrink-0 active:scale-95 shadow-lg shadow-amber-600/20">
                         <span>ASK</span>
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 sm:h-5 sm:w-5" viewBox="0 0 20 20"
                             fill="currentColor">
@@ -126,19 +129,19 @@
 
                 <!-- Responsive AI Response Box -->
                 <div id="ai-response-box"
-                    class="hidden mt-4 sm:mt-6 bg-slate-900/90 border border-slate-800 rounded-2xl p-4 sm:p-6 text-left backdrop-blur-md shadow-xl transition-all duration-300">
+                    class="hidden mt-4 sm:mt-6 bg-stone-900/90 border border-stone-800 rounded-2xl p-4 sm:p-6 text-left backdrop-blur-md shadow-xl transition-all duration-300">
                     <div class="flex items-start gap-3 sm:gap-4">
-                        <div class="bg-blue-500/10 border border-blue-500/20 p-2 sm:p-2.5 rounded-xl shrink-0">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 sm:h-6 sm:w-6 text-blue-400"
+                        <div class="bg-amber-500/10 border border-amber-500/20 p-2 sm:p-2.5 rounded-xl shrink-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 sm:h-6 sm:w-6 text-amber-400"
                                 fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M13 10V3L4 14h7v7l9-11h-7z" />
                             </svg>
                         </div>
                         <div class="flex-1 min-w-0">
-                            <h3 class="text-white font-semibold text-sm sm:text-base mb-1">AI Assistant:</h3>
+                            <h3 class="text-stone-100 font-semibold text-sm sm:text-base mb-1">AI Assistant:</h3>
                             <div id="ai-response-text"
-                                class="text-slate-300 text-xs sm:text-sm md:text-base leading-relaxed break-words">
+                                class="text-stone-300 text-xs sm:text-sm md:text-base leading-relaxed break-words">
                             </div>
                         </div>
                     </div>
@@ -148,42 +151,42 @@
         </div>
     </header>
 
-    <section id="about" class="py-16 sm:py-24 bg-slate-900/50 border-t border-slate-800/80">
+    <section id="about" class="py-16 sm:py-24 bg-stone-900/40 border-t border-stone-800/80">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                 <div class="space-y-6">
-                    <h2 class="text-2xl sm:text-4xl font-bold text-white">About Me</h2>
-                    <p class="text-slate-400 text-sm sm:text-base leading-relaxed">
+                    <h2 class="text-2xl sm:text-4xl font-bold text-stone-100">About Me</h2>
+                    <p class="text-stone-400 text-sm sm:text-base leading-relaxed">
                         I am a Software Engineer with over 7 years of experience in building large-scale web
                         applications, microservices architecture, and API integration.
                     </p>
-                    <p class="text-slate-400 text-sm sm:text-base leading-relaxed">
+                    <p class="text-stone-400 text-sm sm:text-base leading-relaxed">
                         Focused on creating robust backend performance.
                     </p>
                     <div class="grid grid-cols-2 gap-4 pt-4">
-                        <div class="p-4 bg-slate-800/50 rounded-xl border border-slate-700/50">
-                            <div class="text-2xl sm:text-3xl font-bold text-blue-400">7+</div>
-                            <div class="text-xs sm:text-sm text-slate-400">Years of Experience</div>
+                        <div class="p-4 bg-stone-900/60 rounded-xl border border-stone-800">
+                            <div class="text-2xl sm:text-3xl font-bold text-amber-400">7+</div>
+                            <div class="text-xs sm:text-sm text-stone-400">Years of Experience</div>
                         </div>
-                        <div class="p-4 bg-slate-800/50 rounded-xl border border-slate-700/50">
-                            <div class="text-2xl sm:text-3xl font-bold text-purple-400">10+</div>
-                            <div class="text-xs sm:text-sm text-slate-400">Projects Completed</div>
+                        <div class="p-4 bg-stone-900/60 rounded-xl border border-stone-800">
+                            <div class="text-2xl sm:text-3xl font-bold text-orange-400">10+</div>
+                            <div class="text-xs sm:text-sm text-stone-400">Projects Completed</div>
                         </div>
                     </div>
                 </div>
                 <div class="relative flex justify-center">
                     <div
-                        class="w-full max-w-md aspect-square bg-gradient-to-tr from-blue-600 to-purple-600 rounded-3xl p-1 shadow-2xl">
+                        class="w-full max-w-md aspect-square bg-gradient-to-tr from-amber-500 via-orange-500 to-yellow-500 rounded-3xl p-1 shadow-2xl shadow-amber-950/50">
                         <div
-                            class="w-full h-full bg-slate-900 rounded-[23px] flex flex-col items-center justify-center p-8 text-center">
+                            class="w-full h-full bg-stone-900 rounded-[23px] flex flex-col items-center justify-center p-8 text-center">
                             <div
-                                class="w-full h-full bg-slate-900 rounded-[23px] overflow-hidden flex items-center justify-center">
+                                class="w-full h-full bg-stone-900 rounded-[23px] overflow-hidden flex items-center justify-center">
                                 <img src="https://media.licdn.com/dms/image/v2/C5603AQHLdfutTfRgQA/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1664085052568?e=1786579200&v=beta&t=U5uxI-NoIDGkO4cWmmO2gjSrkHUOVaa-aTLDcRcuVaI"
                                     alt="Foto Profil"
                                     class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
                             </div>
-                            <h3 class="text-xl font-bold text-white">Angga Bachtiar</h3>
-                            <p class="text-slate-400 text-sm">SOFTWARE ENGINEER</p>
+                            <h3 class="text-xl font-bold text-stone-100 mt-4">Angga Bachtiar</h3>
+                            <p class="text-amber-400 text-sm font-semibold tracking-wider">SOFTWARE ENGINEER</p>
                         </div>
                     </div>
                 </div>
@@ -193,37 +196,37 @@
 
     <section id="experience" class="py-16 sm:py-24">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-2xl sm:text-4xl font-bold text-white mb-12 text-center">Work Experience</h2>
+            <h2 class="text-2xl sm:text-4xl font-bold text-stone-100 mb-12 text-center">Work Experience</h2>
 
             <div class="space-y-6 sm:space-y-8 max-w-4xl mx-auto">
                 <!-- Card 1 -->
                 <div
-                    class="p-6 sm:p-8 bg-slate-900 rounded-2xl border border-slate-800 hover:border-blue-500/50 transition">
+                    class="p-6 sm:p-8 bg-stone-900/80 rounded-2xl border border-stone-800 hover:border-amber-500/50 transition">
                     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
                         <div>
-                            <h3 class="text-lg sm:text-xl font-bold text-white">Software Engineer</h3>
-                            <p class="text-blue-400 text-sm">Tokopedia</p>
+                            <h3 class="text-lg sm:text-xl font-bold text-stone-100">Software Engineer</h3>
+                            <p class="text-amber-400 text-sm font-medium">Tokopedia</p>
                         </div>
-                        <span class="text-xs sm:text-sm text-slate-400 bg-slate-800 px-3 py-1 rounded-full w-fit">2022 -
+                        <span class="text-xs sm:text-sm text-stone-400 bg-stone-800 px-3 py-1 rounded-full w-fit border border-stone-700">2022 -
                             Present</span>
                     </div>
-                    <p class="text-slate-400 text-sm leading-relaxed">
+                    <p class="text-stone-400 text-sm leading-relaxed">
                         Lipsum
                     </p>
                 </div>
 
                 <!-- Card 2 -->
                 <div
-                    class="p-6 sm:p-8 bg-slate-900 rounded-2xl border border-slate-800 hover:border-blue-500/50 transition">
+                    class="p-6 sm:p-8 bg-stone-900/80 rounded-2xl border border-stone-800 hover:border-amber-500/50 transition">
                     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
                         <div>
-                            <h3 class="text-lg sm:text-xl font-bold text-white">Software Engineer</h3>
-                            <p class="text-blue-400 text-sm">Digital Studio Agency</p>
+                            <h3 class="text-lg sm:text-xl font-bold text-stone-100">Software Engineer</h3>
+                            <p class="text-amber-400 text-sm font-medium">Digital Studio Agency</p>
                         </div>
-                        <span class="text-xs sm:text-sm text-slate-400 bg-slate-800 px-3 py-1 rounded-full w-fit">2021 -
+                        <span class="text-xs sm:text-sm text-stone-400 bg-stone-800 px-3 py-1 rounded-full w-fit border border-stone-700">2021 -
                             2023</span>
                     </div>
-                    <p class="text-slate-400 text-sm leading-relaxed">
+                    <p class="text-stone-400 text-sm leading-relaxed">
                         Lipsum.
                     </p>
                 </div>
@@ -232,10 +235,10 @@
     </section>
 
     <!-- Footer / Contact -->
-    <footer id="contact" class="py-12 border-t border-slate-800 text-slate-400 text-sm text-center">
+    <footer id="contact" class="py-12 border-t border-stone-800 bg-stone-900/20 text-stone-400 text-sm text-center">
         <div class="max-w-7xl mx-auto px-4 space-y-4">
             <p>Contact Me: <a href="mailto:email@domain.com"
-                    class="text-blue-400 hover:underline">bachtiar.angga@gmail.com</a></p>
+                    class="text-amber-400 hover:underline font-medium">bachtiar.angga@gmail.com</a></p>
             <p>&copy; 2026 Angga Bachtiar. All rights reserved.</p>
         </div>
     </footer>
@@ -244,3 +247,5 @@
 </body>
 
 </html>
+
+```
