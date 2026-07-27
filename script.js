@@ -41,6 +41,7 @@ aiForm.addEventListener('submit', async (e) => {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ question })
         });
+        const responseTextContent = await response.text();
 
         if (response.status == 400) {
             throw new Error('API process failed, please email me');
@@ -50,7 +51,7 @@ aiForm.addEventListener('submit', async (e) => {
             throw new Error('AI service is reaching its limit, please try again later');
         }
 
-        responseText.innerHTML = `Answer: <strong>"${question}"</strong>. <br><br>Ganti bagian JavaScript ini dengan perintah <code>fetch('/api/chat', ...)</code> saat backend AI Anda sudah aktif di Vercel atau server lain.`;
+        responseText.innerHTML = `Answer: <strong>"${question}"</strong>. <br><br>${responseTextContent}`;
 
     } catch (error) {
         responseText.innerHTML = `<span class="text-red-400">Error: ${error.message}</span>`;
