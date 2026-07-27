@@ -1,5 +1,5 @@
 {
   "routes": [
-    { "src": "/api/core", "destination": "/api/index" }
+    { "src": "/api/chat", "destination": "/api/index" }
   ]
 }

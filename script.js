@@ -35,7 +35,7 @@ aiForm.addEventListener('submit', async (e) => {
     responseText.innerHTML = `<span class="text-slate-400 typing-indicator">Analyzing Your Question</span>`;
 
     try {
-        const backendURL = '/api/core';
+        const backendURL = '/api/chat';
         const response = await fetch(backendURL, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },

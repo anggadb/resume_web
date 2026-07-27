@@ -27,10 +27,6 @@ RESUME_CONTEXT = load_resume_context()
 class PromptRequest(BaseModel):
     prompt: str
 
-@app.get("/")
-def read_root():
-    return {"status": "Orchestrator API is running", "model": "Gemini 1.5 Flash"}
-
 @app.post("/api/chat")
 async def chat_with_ai(request: PromptRequest):
     if not GEMINI_API_KEY:
