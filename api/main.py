@@ -37,7 +37,7 @@ async def chat_with_ai(request: PromptRequest):
     
     try:
         model = genai.GenerativeModel(
-            model_name="gemini-2.5-flash-lite",
+            model_name="gemini-2.0-flash",
             system_instruction=RESUME_CONTEXT
         )
         
