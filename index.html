@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +7,7 @@
     <!-- Tailwind CSS via CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* Animasi loading sederhana */
+        /* Animasi titik-titik loading AI */
         .typing-indicator::after {
             content: '...';
             animation: typing 1.5s infinite steps(4, end);
@@ -20,80 +20,228 @@
         }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-800 font-sans antialiased">
+<body class="bg-slate-950 text-slate-100 font-sans antialiased overflow-x-hidden selection:bg-blue-500 selection:text-white">
 
-    <!-- Navbar -->
-    <nav class="absolute w-full top-0 z-10 py-6 px-8 flex justify-between items-center text-white">
-        <div class="text-2xl font-bold tracking-tighter">
-            Angga Bachtiar
+    <!-- Navbar Responsive -->
+    <nav class="fixed w-full top-0 z-50 bg-slate-950/80 backdrop-blur-md border-b border-slate-800/50 transition-all">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16 sm:h-20">
+                
+                <!-- Logo -->
+                <a href="#" class="text-xl sm:text-2xl font-bold tracking-tight text-white hover:opacity-90 transition">
+                    Angga Bachtiar
+                </a>
+
+                <!-- Desktop Nav Links -->
+                <div class="hidden md:flex items-center space-x-8 font-medium text-sm text-slate-300">
+                    <a href="#about" class="hover:text-blue-400 transition-colors">About Me</a>
+                    <a href="#experience" class="hover:text-blue-400 transition-colors">Experience</a>
+                    <a href="#contact" class="hover:text-blue-400 transition-colors">Contact</a>
+                </div>
+
+                <!-- Mobile Hamburger Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" type="button" class="text-slate-300 hover:text-white focus:outline-none p-2 rounded-lg bg-slate-900 border border-slate-800" aria-label="Toggle navigation">
+                        <svg id="hamburger-icon" class="h-6 w-6 block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                        <svg id="close-icon" class="h-6 w-6 hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
+                </div>
+
+            </div>
         </div>
-        <div class="hidden md:flex gap-6 font-medium">
-            <a href="#about" class="hover:text-blue-400 transition">About Me</a>
-            <a href="#experience" class="hover:text-blue-400 transition">Career History</a>
-            <a href="#contact" class="hover:text-blue-400 transition">Contact</a>
+
+        <!-- Mobile Drawer Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-slate-900/95 border-b border-slate-800 px-4 pt-2 pb-6 space-y-3 backdrop-blur-lg">
+            <a href="#about" class="mobile-link block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-white hover:bg-slate-800 transition">About Me</a>
+            <a href="#experience" class="mobile-link block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-white hover:bg-slate-800 transition">Experience</a>
+            <a href="#contact" class="mobile-link block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-white hover:bg-slate-800 transition">Contact</a>
         </div>
     </nav>
 
-    <!-- Header / Hero Section dengan AI Input -->
-    <header class="relative bg-slate-900 min-h-screen flex flex-col items-center justify-center px-4 overflow-hidden">
-        <!-- Dekorasi Background Latar Belakang -->
-        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-800 via-slate-900 to-black opacity-80"></div>
-        <div class="absolute w-[500px] h-[500px] bg-blue-600/20 rounded-full blur-3xl -top-20 -left-20"></div>
-        <div class="absolute w-[400px] h-[400px] bg-purple-600/20 rounded-full blur-3xl bottom-10 -right-10"></div>
+    <!-- Header / Hero Section (AI Prompting) -->
+    <header id="ai-hero" class="relative min-h-screen pt-28 pb-16 sm:pt-36 sm:pb-24 flex flex-col justify-center items-center px-4 sm:px-6 lg:px-8">
+        
+        <!-- Glow Decorative Backgrounds -->
+        <div class="absolute w-[280px] sm:w-[500px] h-[280px] sm:h-[500px] bg-blue-600/20 rounded-full blur-3xl -top-10 -left-10 pointer-events-none"></div>
+        <div class="absolute w-[250px] sm:w-[400px] h-[250px] sm:h-[400px] bg-purple-600/20 rounded-full blur-3xl bottom-10 -right-10 pointer-events-none"></div>
 
-        <!-- Konten Hero -->
-        <div class="relative z-10 text-center max-w-3xl mx-auto mt-16">
-            <span class="text-blue-400 font-semibold tracking-wider uppercase text-sm mb-4 block">Software Engineer</span>
-            <h1 class="text-5xl md:text-7xl font-extrabold text-white mb-6 leading-tight">
-                Convert <br> <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">Ideas to Codes</span>
+        <div class="relative z-10 text-center max-w-4xl mx-auto w-full">
+            
+            <!-- Badge -->
+            <div class="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-400 text-xs sm:text-sm font-medium mb-6">
+                <span class="relative flex h-2 w-2">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+                </span>
+                Software Engineer
+            </div>
+
+            <!-- Title -->
+            <h1 class="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-white mb-4 sm:mb-6 leading-[1.15]">
+                CONVERT <br class="hidden sm:inline">
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-500">Ideas to Codes</span>
             </h1>
-            <p class="text-gray-400 text-lg mb-10">
-                Feel free to ask my AI assistant anything related to my career or personal projects
+
+            <!-- Subtitle -->
+            <p class="text-slate-400 text-sm sm:text-lg md:text-xl max-w-2xl mx-auto mb-8 sm:mb-10 px-2 leading-relaxed">
+                Feel free to ask me anything about my experience, projects, or even AI-related questions. My AI assistant is here to assist you!
             </p>
 
-            <!-- AI Prompting Input -->
-            <div class="w-full max-w-2xl mx-auto relative group">
-                <form id="ai-form" class="relative flex items-center shadow-2xl shadow-blue-900/20">
+            <!-- Responsive AI Prompt Input Box -->
+            <div class="w-full max-w-2xl mx-auto">
+                <form id="ai-form" class="flex flex-col sm:flex-row gap-2 sm:gap-0 bg-slate-900/90 border border-slate-700/80 p-2 sm:p-2 rounded-2xl sm:rounded-full shadow-2xl backdrop-blur-md focus-within:border-blue-500 focus-within:ring-2 focus-within:ring-blue-500/30 transition-all">
                     <input 
                         type="text" 
                         id="ai-input" 
-                        class="w-full bg-slate-800/80 border border-slate-700 text-white px-6 py-4 rounded-full outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/50 transition-all text-lg placeholder-slate-500 backdrop-blur-sm"
-                        placeholder="What Angga's most complex project?"
+                        class="w-full bg-transparent px-4 py-3 sm:py-3.5 text-slate-100 placeholder-slate-500 text-sm sm:text-base outline-none rounded-xl sm:rounded-full"
+                        placeholder="Example: What is your experience with Node.js?"
                         required
                     >
                     <button 
                         type="submit" 
-                        class="absolute right-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white px-6 py-2.5 rounded-full font-semibold hover:from-blue-600 hover:to-purple-700 transition-all flex items-center gap-2"
+                        class="w-full sm:w-auto bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white font-semibold px-6 py-3 sm:py-3.5 rounded-xl sm:rounded-full transition-all flex items-center justify-center gap-2 shrink-0 active:scale-95"
                     >
-                        ASK
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <span>ASK</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 sm:h-5 sm:w-5" viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
                         </svg>
                     </button>
                 </form>
 
-                <!-- Box Hasil AI -->
-                <div id="ai-response-box" class="hidden mt-6 bg-slate-800/90 border border-slate-700 rounded-2xl p-6 text-left backdrop-blur-md transition-all duration-300 transform translate-y-0">
-                    <div class="flex items-start gap-4">
-                        <div class="bg-blue-500/20 p-2 rounded-lg">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <!-- Responsive AI Response Box -->
+                <div id="ai-response-box" class="hidden mt-4 sm:mt-6 bg-slate-900/90 border border-slate-800 rounded-2xl p-4 sm:p-6 text-left backdrop-blur-md shadow-xl transition-all duration-300">
+                    <div class="flex items-start gap-3 sm:gap-4">
+                        <div class="bg-blue-500/10 border border-blue-500/20 p-2 sm:p-2.5 rounded-xl shrink-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 sm:h-6 sm:w-6 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
                             </svg>
                         </div>
-                        <div class="flex-1">
-                            <h3 class="text-white font-medium mb-2">Angga:</h3>
-                            <p id="ai-response-text" class="text-gray-300 leading-relaxed text-sm md:text-base">
-                                <!-- Jawaban akan muncul di sini -->
-                            </p>
+                        <div class="flex-1 min-w-0">
+                            <h3 class="text-white font-semibold text-sm sm:text-base mb-1">AI Assistant:</h3>
+                            <div id="ai-response-text" class="text-slate-300 text-xs sm:text-sm md:text-base leading-relaxed break-words">
+                                <!-- Jawaban AI dimasukkan via JS -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </header>
+
+    <!-- Seksi About / Tentang -->
+    <section id="about" class="py-16 sm:py-24 bg-slate-900/50 border-t border-slate-800/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6">
+                    <h2 class="text-2xl sm:text-4xl font-bold text-white">About Me</h2>
+                    <p class="text-slate-400 text-sm sm:text-base leading-relaxed">
+                        I am a Software Engineer with over 7 years of experience in building large-scale web applications, microservices architecture, and API integration.
+                    </p>
+                    <p class="text-slate-400 text-sm sm:text-base leading-relaxed">
+                        Focused on creating robust backend performance.
+                    </p>
+                    <div class="grid grid-cols-2 gap-4 pt-4">
+                        <div class="p-4 bg-slate-800/50 rounded-xl border border-slate-700/50">
+                            <div class="text-2xl sm:text-3xl font-bold text-blue-400">7+</div>
+                            <div class="text-xs sm:text-sm text-slate-400">Years of Experience</div>
+                        </div>
+                        <div class="p-4 bg-slate-800/50 rounded-xl border border-slate-700/50">
+                            <div class="text-2xl sm:text-3xl font-bold text-purple-400">10+</div>
+                            <div class="text-xs sm:text-sm text-slate-400">Projects Completed</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative flex justify-center">
+                    <div class="w-full max-w-md aspect-square bg-gradient-to-tr from-blue-600 to-purple-600 rounded-3xl p-1 shadow-2xl">
+                        <div class="w-full h-full bg-slate-900 rounded-[23px] flex flex-col items-center justify-center p-8 text-center">
+                            <div class="w-24 h-24 sm:w-32 sm:h-32 rounded-full bg-slate-800 border-2 border-blue-500 mb-4 flex items-center justify-center text-3xl font-bold text-blue-400">
+                                NA
+                            </div>
+                            <h3 class="text-xl font-bold text-white">Angga Bachtiar</h3>
+                            <p class="text-slate-400 text-sm">SOFTWARE ENGINEER</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </header>
+    </section>
 
-    <!-- Script Integrasi -->
+    <!-- Seksi Experience / Pengalaman -->
+    <section id="experience" class="py-16 sm:py-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-2xl sm:text-4xl font-bold text-white mb-12 text-center">Work Experience</h2>
+            
+            <div class="space-y-6 sm:space-y-8 max-w-4xl mx-auto">
+                <!-- Card 1 -->
+                <div class="p-6 sm:p-8 bg-slate-900 rounded-2xl border border-slate-800 hover:border-blue-500/50 transition">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
+                        <div>
+                            <h3 class="text-lg sm:text-xl font-bold text-white">Software Engineer</h3>
+                            <p class="text-blue-400 text-sm">Tokopedia</p>
+                        </div>
+                        <span class="text-xs sm:text-sm text-slate-400 bg-slate-800 px-3 py-1 rounded-full w-fit">2022 - Present</span>
+                    </div>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Lipsum
+                    </p>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="p-6 sm:p-8 bg-slate-900 rounded-2xl border border-slate-800 hover:border-blue-500/50 transition">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
+                        <div>
+                            <h3 class="text-lg sm:text-xl font-bold text-white">Software Engineer</h3>
+                            <p class="text-blue-400 text-sm">Digital Studio Agency</p>
+                        </div>
+                        <span class="text-xs sm:text-sm text-slate-400 bg-slate-800 px-3 py-1 rounded-full w-fit">2021 - 2023</span>
+                    </div>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Lipsum.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer / Contact -->
+    <footer id="contact" class="py-12 border-t border-slate-800 text-slate-400 text-sm text-center">
+        <div class="max-w-7xl mx-auto px-4 space-y-4">
+            <p>Contact Me: <a href="mailto:email@domain.com" class="text-blue-400 hover:underline">bachtiar.angga@gmail.com</a></p>
+            <p>&copy; 2026 Angga Bachtiar. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Script Interaktivitas -->
     <script>
+        // 1. Mobile Menu Hamburger Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const hamburgerIcon = document.getElementById('hamburger-icon');
+        const closeIcon = document.getElementById('close-icon');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        function toggleMenu() {
+            const isOpen = !mobileMenu.classList.contains('hidden');
+            if (isOpen) {
+                mobileMenu.classList.add('hidden');
+                hamburgerIcon.classList.remove('hidden');
+                closeIcon.classList.add('hidden');
+            } else {
+                mobileMenu.classList.remove('hidden');
+                hamburgerIcon.classList.add('hidden');
+                closeIcon.classList.remove('hidden');
+            }
+        }
+
+        mobileMenuBtn.addEventListener('click', toggleMenu);
+        mobileLinks.forEach(link => link.addEventListener('click', toggleMenu));
+
+        // 2. AI Form Handling
         const aiForm = document.getElementById('ai-form');
         const aiInput = document.getElementById('ai-input');
         const responseBox = document.getElementById('ai-response-box');
@@ -105,31 +253,19 @@
             const question = aiInput.value.trim();
             if (!question) return;
 
-            // 1. Tampilkan box response dengan status loading
+            // Tampilkan loading state
             responseBox.classList.remove('hidden');
-            responseText.innerHTML = `<span class="text-gray-400 typing-indicator">Analyzing your input...</span>`;
+            responseText.innerHTML = `<span class="text-slate-400 typing-indicator">Analyzing Your Question</span>`;
 
-            // 2. Simulasi Request ke Backend AI (Ganti dengan endpoint API asli Anda)
             try {
-                /* 
-                // UNCOMMENT KODE INI UNTUK INTEGRASI API ASLI:
-                const response = await fetch('https://api.backend-anda.com/chat', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ prompt: question })
-                });
-                const data = await response.json();
-                responseText.innerHTML = data.answer;
-                */
-
-                // Simulasi delay jaringan (HAPUS INI JIKA MENGGUNAKAN API ASLI)
-                await new Promise(resolve => setTimeout(resolve, 2000));
+                // Simulasi network delay
+                await new Promise(resolve => setTimeout(resolve, 1500));
                 
-                // Mock jawaban
-                responseText.innerHTML = `Ini adalah simulasi jawaban AI untuk pertanyaan: <strong>"${question}"</strong>. <br><br> Pada tahap ini, Anda bisa menyambungkan endpoint backend (seperti Express.js atau FastAPI) yang terhubung ke model LLM (OpenAI, Gemini, dll) untuk merespon dengan pengalaman kerja atau portofolio Anda berdasarkan dokumen resume yang telah di-embed.`;
+                // Response Mockup
+                responseText.innerHTML = `Answer: <strong>"${question}"</strong>. <br><br>Ganti bagian JavaScript ini dengan perintah <code>fetch('/api/chat', ...)</code> saat backend AI Anda sudah aktif di Vercel atau server lain.`;
 
             } catch (error) {
-                responseText.innerHTML = `<span class="text-red-400">Maaf, terjadi kesalahan saat menghubungi server AI.</span>`;
+                responseText.innerHTML = `<span class="text-red-400">Terjadi kesalahan koneksi. Silakan coba lagi.</span>`;
             }
         });
     </script>
