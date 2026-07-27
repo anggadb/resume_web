@@ -1,0 +1,24 @@
+ .typing-indicator::after {
+     content: '...';
+     animation: typing 1.5s infinite steps(4, end);
+ }
+
+ @keyframes typing {
+
+     0%,
+     100% {
+         content: '';
+     }
+
+     25% {
+         content: '.';
+     }
+
+     50% {
+         content: '..';
+     }
+
+     75% {
+         content: '...';
+     }
+ }
