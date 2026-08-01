@@ -1,9 +1,8 @@
 import os
 from fastapi import FastAPI, HTTPException
-from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel
 import google.generativeai as genai
 from mangum import Mangum
+from model import PromptRequest
 
 app = FastAPI(
     title="Resume AI Orchestrator API",
@@ -13,7 +12,7 @@ app = FastAPI(
 
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 if GEMINI_API_KEY:
-    genai.configure(api_key=GEMINI_API_KEY)
+    genai.configure(api_key=GEMINI_API_KEY) # type: ignore
 
 def load_resume_context():
     try:
@@ -24,9 +23,6 @@ def load_resume_context():
 
 RESUME_CONTEXT = load_resume_context()
 
-class PromptRequest(BaseModel):
-    prompt: str
-
 @app.post("/api/chat")
 async def chat_with_ai(request: PromptRequest):
     if not GEMINI_API_KEY:
@@ -36,12 +32,12 @@ async def chat_with_ai(request: PromptRequest):
         )
     
     try:
-        model = genai.GenerativeModel(
+        model = genai.GenerativeModel( # type: ignore
             model_name="gemini-2.0-flash",
             system_instruction=RESUME_CONTEXT
         )
         
-        response = model.generate_content(request.prompt)
+        response = model.generate_content(request.prompt) # type: ignore
         
         return {"answer": response.text}
         
