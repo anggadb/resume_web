@@ -41,7 +41,7 @@ aiForm.addEventListener('submit', async (e) => {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ prompt: question })
         });
-        const responseTextContent = await response.text();
+        const responseTextContent = await response.json();
 
         if (response.status == 400) {
             throw new Error('API process failed, please email me');
@@ -51,7 +51,7 @@ aiForm.addEventListener('submit', async (e) => {
             throw new Error('AI service is reaching its limit, please try again later');
         }
 
-        responseText.innerHTML = `Answer: <strong>"${question}"</strong>. <br><br>${responseTextContent}`;
+        responseText.innerHTML = `Question: <strong>"${question}"</strong>. <br><br>${responseTextContent.answer}`;
 
     } catch (error) {
         responseText.innerHTML = `<span class="text-red-400">Error: ${error.message}</span>`;
