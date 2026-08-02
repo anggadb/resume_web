@@ -30,29 +30,10 @@ PINECONE_INDEX = os.getenv("PINECONE_INDEX")
 if not all([GROQ_API_KEY, PINECONE_API_KEY, PINECONE_INDEX]):
     raise RuntimeError("Missing environment variables.")
 
-@asynccontextmanager
-async def lifespan(app: FastAPI):
-    required = [
-        "GROQ_API_KEY",
-        "PINECONE_API_KEY",
-        "PINECONE_INDEX",
-    ]
-
-    missing = [name for name in required if not os.getenv(name)]
-
-    if missing:
-        raise RuntimeError(
-            f"Missing environment variables: {', '.join(missing)}"
-        )
-
-    yield
-
-
 app = FastAPI(
     title="Resume AI Orchestrator API",
     description="AI Orchestrator for Angga Bachtiar's Resume using Gemini 1.5 Flash",
     version="1.0",
-    lifespan=lifespan,
 )
 
 handler = Mangum(app)
