@@ -103,7 +103,7 @@ async def chat(req: PromptRequest) -> dict[str, object]:
     try:
         matches = await asyncio.to_thread(
             retrieve,
-            req.question, # type: ignore
+            req.prompt, # type: ignore
         )
 
         context = "\n\n".join(
@@ -114,7 +114,7 @@ async def chat(req: PromptRequest) -> dict[str, object]:
         answer = await chain.ainvoke(
             {
                 "context": context,
-                "question": req.question, # type: ignore
+                "question": req.prompt, # type: ignore
             }
         )
 
