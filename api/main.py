@@ -1,8 +1,33 @@
 import os
+import asyncio
+import logging
+
 from fastapi import FastAPI, HTTPException
-import google.generativeai as genai
 from mangum import Mangum
-from model import PromptRequest
+
+from pinecone import Pinecone
+
+from langchain_groq import ChatGroq
+from langchain_core.prompts import ChatPromptTemplate
+from langchain_core.output_parsers import StrOutputParser
+
+from api.model import PromptRequest
+
+
+# --------------------------------------------------------
+# Config
+# --------------------------------------------------------
+
+logging.basicConfig(level=logging.INFO)
+
+logger = logging.getLogger(__name__)
+
+GROQ_API_KEY = os.getenv("GROQ_API_KEY")
+PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")
+PINECONE_INDEX = os.getenv("PINECONE_INDEX")
+
+if not all([GROQ_API_KEY, PINECONE_API_KEY, PINECONE_INDEX]):
+    raise RuntimeError("Missing environment variables.")
 
 app = FastAPI(
     title="Resume AI Orchestrator API",
@@ -10,38 +35,105 @@ app = FastAPI(
     version="1.0"
 )
 
-GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
-if GEMINI_API_KEY:
-    genai.configure(api_key=GEMINI_API_KEY) # type: ignore
+handler = Mangum(app)
+pc = Pinecone(api_key=PINECONE_API_KEY)
+index = pc.Index(PINECONE_INDEX) # type: ignore
 
-def load_resume_context():
-    try:
-        with open("context.md", "r", encoding="utf-8") as f:
-            return f.read()
-    except FileNotFoundError:
-        return "AI context is not found."
+llm = ChatGroq(
+    api_key=GROQ_API_KEY, # type: ignore
+    model="openai/gpt-oss-120b",
+    temperature=0,
+)
 
-RESUME_CONTEXT = load_resume_context()
+prompt = ChatPromptTemplate.from_template(
+    """
+You are an AI assistant.
+
+Answer ONLY using the provided context.
+
+If the answer is not contained in the context, simply say you don't know.
+
+Context:
+{context}
+
+Question:
+{question}
+"""
+)
+
+chain = (
+    prompt
+    | llm
+    | StrOutputParser()
+)
+
+
+# --------------------------------------------------------
+# Pinecone Retrieval
+# --------------------------------------------------------
+
+def retrieve(question: str, top_k: int = 5):
+
+    embedding = pc.inference.embed(
+        model="llama-text-embed-v2",
+        inputs=[question],
+        parameters={
+            "input_type": "query",
+        },
+    )
+
+    query_vector = embedding.data[0]["values"]
+
+    result = index.query(
+        vector=query_vector,
+        top_k=top_k,
+        include_metadata=True,
+    )
+
+    return result.matches
+
+
+# --------------------------------------------------------
+# Endpoint
+# --------------------------------------------------------
 
 @app.post("/api/chat")
-async def chat_with_ai(request: PromptRequest):
-    if not GEMINI_API_KEY:
-        raise HTTPException(
-            status_code=500, 
-            detail="GEMINI_API_KEY is not set. Please set the environment variable to use the AI features."
-        )
-    
+async def chat(req: PromptRequest) -> dict[str, object]:
     try:
-        model = genai.GenerativeModel( # type: ignore
-            model_name="gemini-2.0-flash",
-            system_instruction=RESUME_CONTEXT
+        matches = await asyncio.to_thread(
+            retrieve,
+            req.question, # type: ignore
         )
-        
-        response = model.generate_content(request.prompt) # type: ignore
-        
-        return {"answer": response.text}
-        
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Terjadi kesalahan pada AI: {str(e)}")
 
-handler = Mangum(app)
+        context = "\n\n".join(
+            match["metadata"]["text"]
+            for match in matches
+        )
+
+        answer = await chain.ainvoke(
+            {
+                "context": context,
+                "question": req.question, # type: ignore
+            }
+        )
+
+        return {
+            "answer": answer,
+            "sources": [
+                {
+                    "score": match["score"],
+                    "source": match["metadata"].get("source"),
+                    "chunk": match["metadata"].get("chunk"),
+                }
+                for match in matches
+            ],
+        }
+
+    except Exception as e:
+
+        logger.exception(e)
+
+        raise HTTPException(
+            status_code=500,
+            detail=str(e),
+        )
