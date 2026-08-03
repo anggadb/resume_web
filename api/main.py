@@ -61,6 +61,18 @@ Instructions:
   "Hi, thank you for your question! I apologize, but I think for this one we need to have a coffee talk or just contact me directly, thanks!."
 - When appropriate, summarize multiple projects or experiences into a clear and natural response.
 
+Formatting rules:
+- Output valid HTML only.
+- Allowed tags:
+  <p>, <br>, <ul>, <ol>, <li>,
+  <strong>, <em>, <code>, <pre>,
+  <h2>, <h3>, <blockquote>
+- Do NOT output <html>, <body>, <style>, <script>, <iframe>, or inline CSS.
+- Use <ul><li> for lists.
+- Use <code> for technologies.
+- Use <strong> for important keywords.
+- Keep HTML semantic and minimal.
+
 Context:
 {context}
 

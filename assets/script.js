@@ -51,7 +51,20 @@ aiForm.addEventListener('submit', async (e) => {
             throw new Error('AI service is reaching its limit, please try again later');
         }
 
-        responseText.innerHTML = `Question: <strong>"${question}"</strong>. <br><br>${responseTextContent.answer}`;
+        const clean = DOMPurify.sanitize(responseTextContent.answer, {
+            ALLOWED_TAGS: [
+                "p", "br", "ul", "ol", "li",
+                "strong", "em", "code", "pre",
+                "h2", "h3", "blockquote",
+            ],
+            ALLOWED_ATTR: [],
+        });
+
+        if (clean !== responseTextContent.answer) {
+            console.warn("AI response contained disallowed HTML.");
+        }
+
+        responseText.innerHTML = `Question: <strong>"${question}"</strong>. <br><br>${clean}`;
 
     } catch (error) {
         responseText.innerHTML = `<span class="text-red-400">Error: ${error.message}</span>`;
