@@ -11,7 +11,7 @@ from langchain_groq import ChatGroq
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 
-from api.model import PromptRequest
+from api.model import ChatResponse, PromptRequest
 
 
 # --------------------------------------------------------
@@ -117,8 +117,8 @@ def retrieve(question: str, top_k: int = 5):
 # Endpoint
 # --------------------------------------------------------
 
-@app.post("/api/chat")
-async def chat(req: PromptRequest) -> dict[str, object]:
+@app.post("/api/chat", response_model=ChatResponse)
+async def chat(req: PromptRequest) -> ChatResponse:
     try:
         matches = await asyncio.to_thread(
             retrieve,
@@ -137,9 +137,9 @@ async def chat(req: PromptRequest) -> dict[str, object]:
             }
         )
 
-        return {
-            "answer": answer,
-            "sources": [
+        return ChatResponse(
+            answer=answer,
+            sources=[
                 {
                     "score": match["score"],
                     "source": match["metadata"].get("source"),
@@ -147,7 +147,7 @@ async def chat(req: PromptRequest) -> dict[str, object]:
                 }
                 for match in matches
             ],
-        }
+        )
 
     except Exception as e:
 

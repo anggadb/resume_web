@@ -72,9 +72,9 @@ class ChatTests(unittest.IsolatedAsyncioTestCase):
         ):
             response = await main.chat(PromptRequest(prompt="What did you build?"))
 
-        self.assertEqual(response["answer"], "<p>I built a resume assistant.</p>")
+        self.assertEqual(response.answer, "<p>I built a resume assistant.</p>")
         self.assertEqual(
-            response["sources"],
+            [source.model_dump() for source in response.sources],
             [
                 {"score": 0.95, "source": "resume.pdf", "chunk": 4},
                 {"score": 0.82, "source": None, "chunk": None},
