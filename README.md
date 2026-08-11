@@ -35,8 +35,12 @@ Instead of searching through a traditional résumé, visitors can ask direct que
 ```text
 resume_web/
 ├── api/
-│   ├── main.py             # FastAPI application and RAG pipeline
-│   ├── model.py            # Request model
+│   ├── core/               # Configuration and rate limiting
+│   ├── infrastructure/     # Pinecone, Groq, and LangChain setup
+│   ├── routes/             # FastAPI endpoint definitions
+│   ├── services/           # Retrieval and chat orchestration
+│   ├── main.py             # App factory and Vercel entry point
+│   ├── model.py            # Request and response schemas
 │   └── test_main.py        # Unit tests
 ├── assets/
 │   ├── script.js           # Portfolio and chat interactions
