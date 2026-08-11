@@ -11,6 +11,7 @@ os.environ.setdefault("PINECONE_API_KEY", "test-pinecone-key")
 os.environ.setdefault("PINECONE_INDEX", "test-index")
 
 from fastapi import HTTPException
+from starlette.requests import Request
 
 # Prevent client construction during module import from contacting external
 # services. Individual tests configure the mocked clients they exercise.
@@ -21,6 +22,53 @@ with (
     from api import main
 
 from api.model import PromptRequest
+from api.rate_limit import RateLimiter
+
+
+def make_request(ip: str = "127.0.0.1", forwarded_for: str | None = None) -> Request:
+    headers = []
+    if forwarded_for:
+        headers.append((b"x-forwarded-for", forwarded_for.encode()))
+
+    return Request(
+        {
+            "type": "http",
+            "method": "POST",
+            "path": "/api/chat",
+            "headers": headers,
+            "client": (ip, 12345),
+        }
+    )
+
+
+class RateLimiterTests(unittest.IsolatedAsyncioTestCase):
+    async def test_rejects_requests_over_limit_with_retry_after(self):
+        clock = Mock(side_effect=[0.0, 0.0, 1.0, 2.0])
+        limiter = RateLimiter(requests=2, window_seconds=60, clock=clock)
+        request = make_request()
+
+        await limiter(request)
+        await limiter(request)
+
+        with self.assertRaises(HTTPException) as raised:
+            await limiter(request)
+
+        self.assertEqual(raised.exception.status_code, 429)
+        self.assertEqual(raised.exception.headers, {"Retry-After": "58"})
+
+    async def test_allows_requests_after_window_expires(self):
+        clock = Mock(side_effect=[0.0, 0.0, 61.0])
+        limiter = RateLimiter(requests=1, window_seconds=60, clock=clock)
+        request = make_request()
+
+        await limiter(request)
+        await limiter(request)
+
+    async def test_uses_forwarded_client_ip(self):
+        limiter = RateLimiter(requests=1, window_seconds=60)
+
+        await limiter(make_request(forwarded_for="203.0.113.10, 10.0.0.1"))
+        await limiter(make_request(forwarded_for="203.0.113.11, 10.0.0.1"))
 
 
 class RetrieveTests(unittest.TestCase):

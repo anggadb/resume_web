@@ -2,7 +2,7 @@ import os
 import asyncio
 import logging
 
-from fastapi import FastAPI, HTTPException
+from fastapi import Depends, FastAPI, HTTPException
 from mangum import Mangum
 
 from pinecone import Pinecone
@@ -12,6 +12,7 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 
 from api.model import ChatResponse, PromptRequest
+from api.rate_limit import RateLimiter
 
 
 # --------------------------------------------------------
@@ -25,6 +26,8 @@ logger = logging.getLogger(__name__)
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")
 PINECONE_INDEX = os.getenv("PINECONE_INDEX")
+RATE_LIMIT_REQUESTS = int(os.getenv("RATE_LIMIT_REQUESTS", "10"))
+RATE_LIMIT_WINDOW_SECONDS = int(os.getenv("RATE_LIMIT_WINDOW_SECONDS", "60"))
 
 if not all([GROQ_API_KEY, PINECONE_API_KEY, PINECONE_INDEX]):
     raise RuntimeError("Missing environment variables.")
@@ -33,6 +36,11 @@ app = FastAPI(
     title="Resume AI Orchestrator API",
     description="AI Orchestrator for Angga Bachtiar's Resume using Gemini 1.5 Flash",
     version="1.0",
+)
+
+chat_rate_limiter = RateLimiter(
+    requests=RATE_LIMIT_REQUESTS,
+    window_seconds=RATE_LIMIT_WINDOW_SECONDS,
 )
 
 handler = Mangum(app)
@@ -117,7 +125,12 @@ def retrieve(question: str, top_k: int = 5):
 # Endpoint
 # --------------------------------------------------------
 
-@app.post("/api/chat", response_model=ChatResponse)
+@app.post(
+    "/api/chat",
+    response_model=ChatResponse,
+    dependencies=[Depends(chat_rate_limiter)],
+    responses={429: {"description": "Rate limit exceeded"}},
+)
 async def chat(req: PromptRequest) -> ChatResponse:
     try:
         matches = await asyncio.to_thread(

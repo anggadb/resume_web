@@ -71,6 +71,9 @@ Create a `.env` file in the project root:
 GROQ_API_KEY=your_groq_api_key
 PINECONE_API_KEY=your_pinecone_api_key
 PINECONE_INDEX=your_pinecone_index_name
+# Optional: defaults to 10 requests per client every 60 seconds
+RATE_LIMIT_REQUESTS=10
+RATE_LIMIT_WINDOW_SECONDS=60
 ```
 
 Environment files are excluded from Git. Never commit real credentials.
@@ -134,6 +137,8 @@ Add the following environment variables to the Vercel project:
 - `GROQ_API_KEY`
 - `PINECONE_API_KEY`
 - `PINECONE_INDEX`
+- `RATE_LIMIT_REQUESTS` (optional, defaults to `10`)
+- `RATE_LIMIT_WINDOW_SECONDS` (optional, defaults to `60`)
 
 The included `vercel.json` routes `/api/*` requests to the FastAPI application in `api/main.py`.
 
